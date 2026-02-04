@@ -2,7 +2,7 @@ import smtplib
 import re
 from email.message import EmailMessage
 import logging
-
+import os
 
 logging.basicConfig(
     filename = "email_app.log",
@@ -14,8 +14,10 @@ logging.basicConfig(
 
 sender = "zobelahadu@gmail.com"
 regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-password = "ipopskttsctstqib"
+password = os.getenv("Email_Password")
 
+if not password:
+    logging.critical("Email_Password environment variable not set")
 
 def validator(email,pattern):
    return bool(re.match(pattern,email))
