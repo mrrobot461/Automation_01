@@ -1,3 +1,12 @@
-2026-02-04 14:14:15,793 | INFO | Message Sent to: eg8wfwrb8@gmail.com Successfully
-2026-02-04 14:14:15,798 | WARNING | Invalid recipient Email: y13yrg78fbu @gmail.com
-2026-02-04 14:14:17,191 | INFO | Message Sent to: uicugweyfwrf@gmail.com Successfully
+2026-02-07 17:49:28,755 | INFO | 20260207-174912 | Message Sent to: carol.davis@example.org Successfully
+2026-02-07 17:49:31,585 | INFO | 20260207-174912 | Message Sent to: david.miller@example.com Successfully
+2026-02-07 17:49:34,735 | INFO | 20260207-174912 | Message Sent to: emma.wilson@example.net Successfully
+2026-02-07 17:49:36,830 | INFO | 20260207-174912 | Message Sent to: frank.moore@example.org Successfully
+2026-02-07 17:49:39,735 | INFO | 20260207-174912 | Message Sent to: grace.taylor@example.com Successfully
+2026-02-07 17:49:42,702 | INFO | 20260207-174912 | Message Sent to: henry.anderson@example.net Successfully
+2026-02-07 17:49:45,103 | INFO | 20260207-174912 | Message Sent to: isabel.thomas@example.org Successfully
+2026-02-07 17:49:47,438 | INFO | 20260207-174912 | Message Sent to: jack.lee@example.com Successfully
+2026-02-07 17:49:47,585 | INFO | 20260207-174912 | Executive Report----------------------
+Sent emails: 13
+Invalid emails: 2
+Bounced emails: 0
