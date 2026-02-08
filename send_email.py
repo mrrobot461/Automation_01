@@ -15,7 +15,7 @@ logger.setLevel(logging.INFO)
 
 handler = RotatingFileHandler(
     "email_app.log",
-    maxBytes=1000,
+    maxBytes=100000,
     backupCount=5
 )
 
@@ -30,11 +30,26 @@ password = os.getenv("EMAIL_PASSWORD")
 def validator(email, pattern):
     return bool(re.match(pattern, email))
 
+def read_recipients(file):
+    
+    try:
+        with open(file ,"r") as f:
+            recipients = [line.strip() for line in f if line.strip()]
+    except Exception as e:
+        logger.error(f"Failed to read recipients file: {e}", extra={"execution_id": execution_id})
+    return recipients
+def send_email(recipient,msg,server):
+            server.send_message(msg)
+            logger.info(f"Message Sent to: {recipient} Successfully", extra={"execution_id": execution_id})
+            
+        
+
 
 def main():
     sent_counter = 0
     invalid_counter = 0
     bounced_counter = 0
+
 
     if not password:
         logger.critical("Email_Password environment variable not set", extra={"execution_id": execution_id})
@@ -43,17 +58,15 @@ def main():
     if not validator(sender, regex):
         logger.error("Invalid Sender Email", extra={"execution_id": execution_id})
         return
+    
+    recipients = read_recipients("recipients.txt")
 
-    try:
-        with open("recipients.txt", "r") as f:
-            recipients = [line.strip() for line in f if line.strip()]
-    except Exception as e:
-        logger.error(f"Failed to read recipients file: {e}", extra={"execution_id": execution_id})
+    if not recipients:
+        logger.error("Unable to access recipient file", extra={"execution_id": execution_id})
         return
-
-    # Open SMTP connection once if not DRY_RUN
+    
     server = None
-    if not DRY_RUN:
+    if DRY_RUN == False:
         try:
             server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
             server.login(sender, password)
@@ -70,28 +83,33 @@ def main():
             invalid_counter += 1
             continue
 
+
+        if DRY_RUN == True:
+
+            logger.info(f"DRY RUN: Would send email to {recipient}", 
+                        extra={"execution_id": execution_id})
+            sent_counter += 1
+            continue
+
+
         msg = EmailMessage()
         msg["Subject"] = "Test Automation Email"
         msg["From"] = sender
         msg["To"] = recipient
         msg.set_content("This is an automated email sent from Python.")
 
-        if DRY_RUN:
-            logger.info(f"DRY RUN: Would send email to {recipient}", extra={"execution_id": execution_id})
-            sent_counter += 1
-            continue
-
         try:
-            server.send_message(msg)
-            logger.info(f"Message Sent to: {recipient} Successfully", extra={"execution_id": execution_id})
-            sent_counter += 1
+                send_email(recipient,msg,server)
+                sent_counter+=1
         except smtplib.SMTPRecipientsRefused:
-            logger.warning(f"Failed to send: recipient email {recipient} not found", extra={"execution_id": execution_id})
-            bounced_counter += 1
+                logger.warning(f"Failed to send: recipient email {recipient} not found", extra={"execution_id": execution_id})
+                bounced_counter+=1
         except Exception as e:
-            logger.error(f"Unexpected error sending email to {recipient}: {e}", extra={"execution_id": execution_id})
-            bounced_counter += 1
+                logger.error(f"Unexpected error sending email to {recipient}: {e}", extra={"execution_id": execution_id})
+                bounced_counter+=1
+   
 
+    
     if server:
         server.quit()
 

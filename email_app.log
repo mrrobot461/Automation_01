@@ -1,12 +1,42 @@
-2026-02-07 17:49:28,755 | INFO | 20260207-174912 | Message Sent to: carol.davis@example.org Successfully
-2026-02-07 17:49:31,585 | INFO | 20260207-174912 | Message Sent to: david.miller@example.com Successfully
-2026-02-07 17:49:34,735 | INFO | 20260207-174912 | Message Sent to: emma.wilson@example.net Successfully
-2026-02-07 17:49:36,830 | INFO | 20260207-174912 | Message Sent to: frank.moore@example.org Successfully
-2026-02-07 17:49:39,735 | INFO | 20260207-174912 | Message Sent to: grace.taylor@example.com Successfully
-2026-02-07 17:49:42,702 | INFO | 20260207-174912 | Message Sent to: henry.anderson@example.net Successfully
-2026-02-07 17:49:45,103 | INFO | 20260207-174912 | Message Sent to: isabel.thomas@example.org Successfully
-2026-02-07 17:49:47,438 | INFO | 20260207-174912 | Message Sent to: jack.lee@example.com Successfully
-2026-02-07 17:49:47,585 | INFO | 20260207-174912 | Executive Report----------------------
+2026-02-08 15:49:28,380 | INFO | 20260208-154928 | Executive Report----------------------
+Sent emails: 13
+Invalid emails: 2
+Bounced emails: 0
+2026-02-08 15:51:16,896 | INFO | 20260208-155116 | DRY RUN: Would send email to kebede298@gmail.com
+2026-02-08 15:51:16,897 | INFO | 20260208-155116 | DRY RUN: Would send email to ayevuir3@gmail.com
+2026-02-08 15:51:16,897 | WARNING | 20260208-155116 | Invalid recipient Email: dcc2y2 x@gmail.com
+2026-02-08 15:51:16,897 | WARNING | 20260208-155116 | Invalid recipient Email: ebuwe 24g2@gmail.com
+2026-02-08 15:51:16,898 | INFO | 20260208-155116 | DRY RUN: Would send email to eg8wfwrb8@gmail.com
+2026-02-08 15:51:16,898 | INFO | 20260208-155116 | DRY RUN: Would send email to alice.smith@example.com
+2026-02-08 15:51:16,898 | INFO | 20260208-155116 | DRY RUN: Would send email to bob.johnson@example.net
+2026-02-08 15:51:16,898 | INFO | 20260208-155116 | DRY RUN: Would send email to carol.davis@example.org
+2026-02-08 15:51:16,898 | INFO | 20260208-155116 | DRY RUN: Would send email to david.miller@example.com
+2026-02-08 15:51:16,898 | INFO | 20260208-155116 | DRY RUN: Would send email to emma.wilson@example.net
+2026-02-08 15:51:16,898 | INFO | 20260208-155116 | DRY RUN: Would send email to frank.moore@example.org
+2026-02-08 15:51:16,898 | INFO | 20260208-155116 | DRY RUN: Would send email to grace.taylor@example.com
+2026-02-08 15:51:16,898 | INFO | 20260208-155116 | DRY RUN: Would send email to henry.anderson@example.net
+2026-02-08 15:51:16,898 | INFO | 20260208-155116 | DRY RUN: Would send email to isabel.thomas@example.org
+2026-02-08 15:51:16,899 | INFO | 20260208-155116 | DRY RUN: Would send email to jack.lee@example.com
+2026-02-08 15:51:16,899 | INFO | 20260208-155116 | Executive Report----------------------
+Sent emails: 13
+Invalid emails: 2
+Bounced emails: 0
+2026-02-08 15:51:51,895 | INFO | 20260208-155148 | Message Sent to: kebede298@gmail.com Successfully
+2026-02-08 15:51:53,420 | INFO | 20260208-155148 | Message Sent to: ayevuir3@gmail.com Successfully
+2026-02-08 15:51:53,421 | WARNING | 20260208-155148 | Invalid recipient Email: dcc2y2 x@gmail.com
+2026-02-08 15:51:53,421 | WARNING | 20260208-155148 | Invalid recipient Email: ebuwe 24g2@gmail.com
+2026-02-08 15:51:54,670 | INFO | 20260208-155148 | Message Sent to: eg8wfwrb8@gmail.com Successfully
+2026-02-08 15:51:56,173 | INFO | 20260208-155148 | Message Sent to: alice.smith@example.com Successfully
+2026-02-08 15:51:57,459 | INFO | 20260208-155148 | Message Sent to: bob.johnson@example.net Successfully
+2026-02-08 15:51:59,769 | INFO | 20260208-155148 | Message Sent to: carol.davis@example.org Successfully
+2026-02-08 15:52:01,612 | INFO | 20260208-155148 | Message Sent to: david.miller@example.com Successfully
+2026-02-08 15:52:04,479 | INFO | 20260208-155148 | Message Sent to: emma.wilson@example.net Successfully
+2026-02-08 15:52:05,913 | INFO | 20260208-155148 | Message Sent to: frank.moore@example.org Successfully
+2026-02-08 15:52:07,600 | INFO | 20260208-155148 | Message Sent to: grace.taylor@example.com Successfully
+2026-02-08 15:52:10,076 | INFO | 20260208-155148 | Message Sent to: henry.anderson@example.net Successfully
+2026-02-08 15:52:11,685 | INFO | 20260208-155148 | Message Sent to: isabel.thomas@example.org Successfully
+2026-02-08 15:52:13,178 | INFO | 20260208-155148 | Message Sent to: jack.lee@example.com Successfully
+2026-02-08 15:52:13,493 | INFO | 20260208-155148 | Executive Report----------------------
 Sent emails: 13
 Invalid emails: 2
 Bounced emails: 0
