@@ -6,12 +6,17 @@ import datetime
 from email.message import EmailMessage
 from logging.handlers import RotatingFileHandler
 
-DRY_RUN = False
+
+DRY_RUN = True
+
 
 execution_id = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 
+
+
 logger = logging.getLogger("email_sender")
 logger.setLevel(logging.INFO)
+
 
 handler = RotatingFileHandler(
     "email_app.log",
@@ -23,12 +28,16 @@ formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(execution_id)s | 
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
+
+
 sender = "zobelahadu@gmail.com"
 regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
 password = os.getenv("EMAIL_PASSWORD")
 
+
 def validator(email, pattern):
     return bool(re.match(pattern, email))
+
 
 def read_recipients(file):
     
@@ -42,14 +51,47 @@ def send_email(recipient,msg,server):
             server.send_message(msg)
             logger.info(f"Message Sent to: {recipient} Successfully", extra={"execution_id": execution_id})
             
-        
 
-
-def main():
+def processor(recipients,server=None,dry_run=True):
     sent_counter = 0
     invalid_counter = 0
     bounced_counter = 0
+    for recipient in recipients:
+        if not validator(recipient, regex):
+            logger.warning(f"Invalid recipient Email: {recipient}", extra={"execution_id": execution_id})
+            invalid_counter += 1
+            continue
 
+        if dry_run:
+            logger.info(f"DRY RUN: Would send email to {recipient}", extra={"execution_id": execution_id})
+            sent_counter += 1
+            continue
+        
+      
+        msg = EmailMessage()
+        msg["Subject"] = "Test Automation Email"
+        msg["From"] = sender
+        msg["To"] = recipient
+        msg.set_content("This is an automated email sent from Python.")
+
+        try:
+            send_email(recipient, msg, server)
+            sent_counter += 1
+        except smtplib.SMTPRecipientsRefused:
+            logger.warning(f"Failed to send: recipient email {recipient} not found", extra={"execution_id": execution_id})
+            bounced_counter += 1
+        except Exception as e:
+            logger.error(f"Unexpected error sending email to {recipient}: {e}", extra={"execution_id": execution_id})
+            bounced_counter += 1
+
+    return {
+        "sent": sent_counter,
+        "invalid": invalid_counter,
+        "bounced": bounced_counter
+    }
+
+def main():
+    
 
     if not password:
         logger.critical("Email_Password environment variable not set", extra={"execution_id": execution_id})
@@ -77,47 +119,16 @@ def main():
             logger.error(f"Unexpected login error: {e}", extra={"execution_id": execution_id})
             return
 
-    for recipient in recipients:
-        if not validator(recipient, regex):
-            logger.warning(f"Invalid recipient Email: {recipient}", extra={"execution_id": execution_id})
-            invalid_counter += 1
-            continue
+    report = processor(recipients, server=server, dry_run=DRY_RUN)
 
-
-        if DRY_RUN == True:
-
-            logger.info(f"DRY RUN: Would send email to {recipient}", 
-                        extra={"execution_id": execution_id})
-            sent_counter += 1
-            continue
-
-
-        msg = EmailMessage()
-        msg["Subject"] = "Test Automation Email"
-        msg["From"] = sender
-        msg["To"] = recipient
-        msg.set_content("This is an automated email sent from Python.")
-
-        try:
-                send_email(recipient,msg,server)
-                sent_counter+=1
-        except smtplib.SMTPRecipientsRefused:
-                logger.warning(f"Failed to send: recipient email {recipient} not found", extra={"execution_id": execution_id})
-                bounced_counter+=1
-        except Exception as e:
-                logger.error(f"Unexpected error sending email to {recipient}: {e}", extra={"execution_id": execution_id})
-                bounced_counter+=1
-   
-
-    
     if server:
         server.quit()
 
     executive_report = (
         f"Executive Report----------------------\n"
-        f"Sent emails: {sent_counter}\n"
-        f"Invalid emails: {invalid_counter}\n"
-        f"Bounced emails: {bounced_counter}"
+        f"Sent emails: {report['sent']}\n"
+        f"Invalid emails: {report['invalid']}\n"
+        f"Bounced emails: {report['bounced']}"
     )
     logger.info(executive_report, extra={"execution_id": execution_id})
 

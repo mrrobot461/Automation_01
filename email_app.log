@@ -40,3 +40,61 @@ Bounced emails: 0
 Sent emails: 13
 Invalid emails: 2
 Bounced emails: 0
+2026-02-08 16:58:49,831 | INFO | 20260208-165846 | Message Sent to: kebede298@gmail.com Successfully
+2026-02-08 16:58:51,196 | INFO | 20260208-165846 | Message Sent to: ayevuir3@gmail.com Successfully
+2026-02-08 16:58:51,196 | WARNING | 20260208-165846 | Invalid recipient Email: dcc2y2 x@gmail.com
+2026-02-08 16:58:51,197 | WARNING | 20260208-165846 | Invalid recipient Email: ebuwe 24g2@gmail.com
+2026-02-08 16:58:52,292 | INFO | 20260208-165846 | Message Sent to: eg8wfwrb8@gmail.com Successfully
+2026-02-08 16:58:53,803 | INFO | 20260208-165846 | Message Sent to: alice.smith@example.com Successfully
+2026-02-08 16:58:55,247 | INFO | 20260208-165846 | Message Sent to: bob.johnson@example.net Successfully
+2026-02-08 16:58:56,426 | INFO | 20260208-165846 | Message Sent to: carol.davis@example.org Successfully
+2026-02-08 16:58:57,726 | INFO | 20260208-165846 | Message Sent to: david.miller@example.com Successfully
+2026-02-08 16:58:58,999 | INFO | 20260208-165846 | Message Sent to: emma.wilson@example.net Successfully
+2026-02-08 16:59:00,263 | INFO | 20260208-165846 | Message Sent to: frank.moore@example.org Successfully
+2026-02-08 16:59:01,484 | INFO | 20260208-165846 | Message Sent to: grace.taylor@example.com Successfully
+2026-02-08 16:59:02,685 | INFO | 20260208-165846 | Message Sent to: henry.anderson@example.net Successfully
+2026-02-08 16:59:03,968 | INFO | 20260208-165846 | Message Sent to: isabel.thomas@example.org Successfully
+2026-02-08 16:59:05,237 | INFO | 20260208-165846 | Message Sent to: jack.lee@example.com Successfully
+2026-02-08 16:59:05,397 | INFO | 20260208-165846 | Executive Report----------------------
+Sent emails: 13
+Invalid emails: 2
+Bounced emails: 0
+2026-02-08 17:03:09,596 | ERROR | 20260208-170309 | Unable to access recipient file
+2026-02-08 17:03:31,643 | INFO | 20260208-170331 | DRY RUN: Would send email to kebede298@gmail.com
+2026-02-08 17:03:31,644 | INFO | 20260208-170331 | DRY RUN: Would send email to ayevuir3@gmail.com
+2026-02-08 17:03:31,645 | WARNING | 20260208-170331 | Invalid recipient Email: dcc2y2 x@gmail.com
+2026-02-08 17:03:31,645 | WARNING | 20260208-170331 | Invalid recipient Email: ebuwe 24g2@gmail.com
+2026-02-08 17:03:31,646 | INFO | 20260208-170331 | DRY RUN: Would send email to eg8wfwrb8@gmail.com
+2026-02-08 17:03:31,647 | INFO | 20260208-170331 | DRY RUN: Would send email to alice.smith@example.com
+2026-02-08 17:03:31,647 | INFO | 20260208-170331 | DRY RUN: Would send email to bob.johnson@example.net
+2026-02-08 17:03:31,648 | INFO | 20260208-170331 | DRY RUN: Would send email to carol.davis@example.org
+2026-02-08 17:03:31,648 | INFO | 20260208-170331 | DRY RUN: Would send email to david.miller@example.com
+2026-02-08 17:03:31,649 | INFO | 20260208-170331 | DRY RUN: Would send email to emma.wilson@example.net
+2026-02-08 17:03:31,649 | INFO | 20260208-170331 | DRY RUN: Would send email to frank.moore@example.org
+2026-02-08 17:03:31,650 | INFO | 20260208-170331 | DRY RUN: Would send email to grace.taylor@example.com
+2026-02-08 17:03:31,650 | INFO | 20260208-170331 | DRY RUN: Would send email to henry.anderson@example.net
+2026-02-08 17:03:31,651 | INFO | 20260208-170331 | DRY RUN: Would send email to isabel.thomas@example.org
+2026-02-08 17:03:31,651 | INFO | 20260208-170331 | DRY RUN: Would send email to jack.lee@example.com
+2026-02-08 17:03:31,652 | INFO | 20260208-170331 | Executive Report----------------------
+Sent emails: 13
+Invalid emails: 2
+Bounced emails: 0
+2026-02-08 17:03:48,417 | INFO | 20260208-170348 | DRY RUN: Would send email to kebede298@gmail.com
+2026-02-08 17:03:48,418 | INFO | 20260208-170348 | DRY RUN: Would send email to ayevuir3@gmail.com
+2026-02-08 17:03:48,418 | WARNING | 20260208-170348 | Invalid recipient Email: dcc2y2 x@gmail.com
+2026-02-08 17:03:48,419 | WARNING | 20260208-170348 | Invalid recipient Email: ebuwe 24g2@gmail.com
+2026-02-08 17:03:48,419 | INFO | 20260208-170348 | DRY RUN: Would send email to eg8wfwrb8@gmail.com
+2026-02-08 17:03:48,419 | INFO | 20260208-170348 | DRY RUN: Would send email to alice.smith@example.com
+2026-02-08 17:03:48,420 | INFO | 20260208-170348 | DRY RUN: Would send email to bob.johnson@example.net
+2026-02-08 17:03:48,420 | INFO | 20260208-170348 | DRY RUN: Would send email to carol.davis@example.org
+2026-02-08 17:03:48,420 | INFO | 20260208-170348 | DRY RUN: Would send email to david.miller@example.com
+2026-02-08 17:03:48,420 | INFO | 20260208-170348 | DRY RUN: Would send email to emma.wilson@example.net
+2026-02-08 17:03:48,421 | INFO | 20260208-170348 | DRY RUN: Would send email to frank.moore@example.org
+2026-02-08 17:03:48,421 | INFO | 20260208-170348 | DRY RUN: Would send email to grace.taylor@example.com
+2026-02-08 17:03:48,421 | INFO | 20260208-170348 | DRY RUN: Would send email to henry.anderson@example.net
+2026-02-08 17:03:48,421 | INFO | 20260208-170348 | DRY RUN: Would send email to isabel.thomas@example.org
+2026-02-08 17:03:48,421 | INFO | 20260208-170348 | DRY RUN: Would send email to jack.lee@example.com
+2026-02-08 17:03:48,421 | INFO | 20260208-170348 | Executive Report----------------------
+Sent emails: 13
+Invalid emails: 2
+Bounced emails: 0
