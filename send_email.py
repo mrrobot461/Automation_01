@@ -3,11 +3,19 @@ import re
 import logging
 import os
 import datetime
+import yaml
+from pathlib import Path
 from email.message import EmailMessage
 from logging.handlers import RotatingFileHandler
 
+CONFIG_PATH = Path("C:/Users/Leul/OneDrive/المستندات/Automation/config.yaml")
 
-DRY_RUN = True
+with open(CONFIG_PATH, "r") as f:
+    config = yaml.safe_load(f)
+
+
+
+DRY_RUN = config["app"]["dry_run"]
 
 
 execution_id = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -30,9 +38,9 @@ logger.addHandler(handler)
 
 
 
-sender = "zobelahadu@gmail.com"
+sender = config["email"]["sender_email"]
 regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-password = os.getenv("EMAIL_PASSWORD")
+password = config["auth"]["sender_password"]
 
 
 def validator(email, pattern):
@@ -110,7 +118,7 @@ def main():
     server = None
     if DRY_RUN == False:
         try:
-            server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+            server = config["email"]["smtp_server"]
             server.login(sender, password)
         except smtplib.SMTPAuthenticationError:
             logger.error("Login failed: check your email/password or app password", extra={"execution_id": execution_id})
