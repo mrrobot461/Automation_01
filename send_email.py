@@ -8,10 +8,21 @@ from pathlib import Path
 from email.message import EmailMessage
 from logging.handlers import RotatingFileHandler
 
-CONFIG_PATH = Path("C:/Users/Leul/OneDrive/المستندات/Automation/config.yaml")
+
+
+BASE_DIR = Path(__file__).resolve().parent
+CONFIG_PATH = BASE_DIR / "config.yaml"
 
 with open(CONFIG_PATH, "r") as f:
+  
     config = yaml.safe_load(f)
+
+BASE_DIR = Path(__file__).resolve().parent
+LOG_PATH = BASE_DIR / "email_app.log"
+
+BASE_DIR = Path(__file__).resolve().parent
+RECIPIENTS_PATH = BASE_DIR / "recipients.txt"
+
 
 
 
@@ -27,7 +38,7 @@ logger.setLevel(logging.INFO)
 
 
 handler = RotatingFileHandler(
-    "email_app.log",
+   LOG_PATH,
     maxBytes=100000,
     backupCount=5
 )
@@ -48,7 +59,7 @@ def validator(email, pattern):
 
 
 def read_recipients(file):
-    
+    recipients = []
     try:
         with open(file ,"r") as f:
             recipients = [line.strip() for line in f if line.strip()]
@@ -109,7 +120,7 @@ def main():
         logger.error("Invalid Sender Email", extra={"execution_id": execution_id})
         return
     
-    recipients = read_recipients("recipients.txt")
+    recipients = read_recipients(RECIPIENTS_PATH)
 
     if not recipients:
         logger.error("Unable to access recipient file", extra={"execution_id": execution_id})
@@ -118,8 +129,9 @@ def main():
     server = None
     if DRY_RUN == False:
         try:
-            server = config["email"]["smtp_server"]
-            server.login(sender, password)
+           server = smtplib.SMTP_SSL(config["email"]["smtp_server"], config["email"]["smtp_port"])
+           server.login(sender, password)
+
         except smtplib.SMTPAuthenticationError:
             logger.error("Login failed: check your email/password or app password", extra={"execution_id": execution_id})
             return
