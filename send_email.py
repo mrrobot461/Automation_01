@@ -4,9 +4,11 @@ import logging
 import os
 import datetime
 import yaml
+import subprocess
 from pathlib import Path
 from email.message import EmailMessage
 from logging.handlers import RotatingFileHandler
+
 
 
 
@@ -23,9 +25,39 @@ LOG_PATH = BASE_DIR / "email_app.log"
 BASE_DIR = Path(__file__).resolve().parent
 RECIPIENTS_PATH = BASE_DIR / "recipients.txt"
 
+cron_config = config.get("cron", {})
+minute = cron_config.get("minute", "*")
+hour = cron_config.get("hour", "*")
+day_of_month = cron_config.get("day_of_month", "*")
+month = cron_config.get("month", "*")
+day_of_week = cron_config.get("day_of_week", "*")
+
+BASE_DIR = Path(__file__).resolve().parent
+SCRIPT_PATH = BASE_DIR / "send_email.py"
+LOG_PATH = BASE_DIR / "cron_output.log"
+
+cron_line = f"{minute} {hour} {day_of_month} {month} {day_of_week} /usr/bin/python3 {SCRIPT_PATH} >> {LOG_PATH} 2>&1"
+
+# Write to current user's crontab
+try:
+    # Get existing crontab
+    existing_cron = subprocess.run(["crontab", "-l"], capture_output=True, text=True)
+    cron_jobs = existing_cron.stdout if existing_cron.returncode == 0 else ""
+    
+    # Avoid duplicate entries
+    if cron_line not in cron_jobs:
+        cron_jobs += cron_line + "\n"
+        process = subprocess.run(["crontab", "-"], input=cron_jobs, text=True)
+        print("Cron job installed/updated successfully.")
+    else:
+        print("Cron job already exists.")
+except Exception as e:
+    print("Error setting cron job:", e)
 
 
 
+
+    
 DRY_RUN = config["app"]["dry_run"]
 
 
