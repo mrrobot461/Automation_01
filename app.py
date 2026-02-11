@@ -1,17 +1,11 @@
-from flask import Flask
-
-app = Flask(__name__)
-
-@app.route("/")
-def home():
-    #return render_template(home.html)
-    pass
-
-if __name__ == "__main__":
-    app.run()
+import os
+password = os.getenv("EMAIL_PASSWORD")
+print(f"Password found: {'✅ YES' if password else '❌ NO'}")
+print(f"Length: {len(password) if password else 0}")
 
 
 
 
 
-C:\Users/Leul/OneDrive/المستندات/Automation/config.yaml
+
+

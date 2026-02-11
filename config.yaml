@@ -1,19 +1,24 @@
 app:
   name: bulk_emailer
-  dry_run: true
+  dry_run: True
+  cron:
+  minute: 36
+  hour: 18
+  day_of_month: "*"
+  month: "*"
+  day_of_week: "*"
 
 email:
   smtp_server: smtp.gmail.com
-  smtp_port: 587
+  smtp_port: 465
   sender_email: zobelahadu@gmail.com
 
-auth:
-  sender_password: os.getenv("EMAIL_PASSWORD")
+
 
 campaign:
   subject: "Weekly Update"
   body_file: "email_body.txt"
-  recipients_file: "recipients.csv"
+  recipients_file: "recipients.txt"
   max_emails_per_run: 50
 
 logging:

@@ -23,40 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent
 LOG_PATH = BASE_DIR / "email_app.log"
 
 BASE_DIR = Path(__file__).resolve().parent
-RECIPIENTS_PATH = BASE_DIR / "recipients.txt"
+RECIPIENTS_PATH = config["campaign"]["recipients_file"]
 
-cron_config = config.get("cron", {})
-minute = cron_config.get("minute", "*")
-hour = cron_config.get("hour", "*")
-day_of_month = cron_config.get("day_of_month", "*")
-month = cron_config.get("month", "*")
-day_of_week = cron_config.get("day_of_week", "*")
-
-BASE_DIR = Path(__file__).resolve().parent
-SCRIPT_PATH = BASE_DIR / "send_email.py"
-LOG_PATH = BASE_DIR / "cron_output.log"
-
-cron_line = f"{minute} {hour} {day_of_month} {month} {day_of_week} /usr/bin/python3 {SCRIPT_PATH} >> {LOG_PATH} 2>&1"
-
-# Write to current user's crontab
-try:
-    # Get existing crontab
-    existing_cron = subprocess.run(["crontab", "-l"], capture_output=True, text=True)
-    cron_jobs = existing_cron.stdout if existing_cron.returncode == 0 else ""
-    
-    # Avoid duplicate entries
-    if cron_line not in cron_jobs:
-        cron_jobs += cron_line + "\n"
-        process = subprocess.run(["crontab", "-"], input=cron_jobs, text=True)
-        print("Cron job installed/updated successfully.")
-    else:
-        print("Cron job already exists.")
-except Exception as e:
-    print("Error setting cron job:", e)
-
-
-
-
+ 
     
 DRY_RUN = config["app"]["dry_run"]
 
@@ -83,7 +52,7 @@ logger.addHandler(handler)
 
 sender = config["email"]["sender_email"]
 regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-password = config["auth"]["sender_password"]
+password = os.getenv("EMAIL_PASSWORD")
 
 
 def validator(email, pattern):
@@ -123,7 +92,13 @@ def processor(recipients,server=None,dry_run=True):
         msg["Subject"] = "Test Automation Email"
         msg["From"] = sender
         msg["To"] = recipient
-        msg.set_content("This is an automated email sent from Python.")
+        body_path = config["campaign"]["body_file"]
+        try:
+            with open (BASE_DIR / body_path, "r",encoding="utf-8") as f:
+                body = f.read()
+        except Exception as e:
+             logger.error(f"Failed to open  file: {e}", extra={"execution_id": execution_id})
+        msg.set_content(body)
 
         try:
             send_email(recipient, msg, server)
